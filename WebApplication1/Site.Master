@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication1.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:LoginView ID="LoginView1" runat="server">
+            <AnonymousTemplate>
+                <asp:Button ID="buttonLogin" runat="server" Text="Login" OnClick="buttonLogin_Click" />
+                <asp:Button ID="buttonRegister" runat="server" Text="Register" OnClick="buttonRegister_Click" />
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                You are logged in as&nbsp;<asp:LoginName ID="LoginName1" runat="server" />
+                &nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" BackColor="#99FF33" BorderStyle="Solid" LogoutPageUrl="~/default.aspx" />
+                &nbsp;&nbsp;<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Sugest news" />
+                &nbsp;
+            </LoggedInTemplate>
+            <RoleGroups>
+                <asp:RoleGroup Roles="Admin">
+                    <ContentTemplate>
+                        You are logged in as&nbsp;<asp:LoginName ID="LoginName1" runat="server" />
+                        &nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" BackColor="#99FF33" BorderStyle="Solid" LogoutPageUrl="~/default.aspx" />
+                        &nbsp;<asp:Button ID="idManageNews2" runat="server" OnClick="idManageNews_Click" Text="Manage news" />
+                        &nbsp;&nbsp;<asp:Button ID="idManageUsers" runat="server" OnClick="idManageUsers_Click" Text="Manage users" />
+                    </ContentTemplate>
+                </asp:RoleGroup>
+                <asp:RoleGroup Roles="Editor">
+                    <ContentTemplate>
+                        You are logged in as&nbsp;<asp:LoginName ID="LoginName1" runat="server" />
+                        &nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" BackColor="#99FF33" BorderStyle="Solid" LogoutPageUrl="~/default.aspx" />
+                        &nbsp;&nbsp;<asp:Button ID="idManageNews" runat="server" OnClick="idManageNews_Click" Text="Manage news" />
+                    </ContentTemplate>
+                </asp:RoleGroup>
+            </RoleGroups>
+        </asp:LoginView>
+    </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
