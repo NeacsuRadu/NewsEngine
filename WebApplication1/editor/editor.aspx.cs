@@ -59,5 +59,38 @@ namespace WebApplication1.editor
                 }
             }
         }
+
+        protected void idAddNews_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                conn.Open();
+
+                string szTitle = idTitleTextBox.Text;
+                Guid idNews = Guid.NewGuid();
+                Guid idCategory = new Guid(idDropCategory.SelectedValue.ToString());
+
+                string szInsert = "INSERT INTO News VALUES (@idNews, @title, @idCategory)";
+                SqlCommand sqlInsert = new SqlCommand(szInsert, conn);
+                sqlInsert.Parameters.AddWithValue("@idNews", idNews);
+                sqlInsert.Parameters.AddWithValue("@title", szTitle);
+                sqlInsert.Parameters.AddWithValue("@idCategory", idCategory);
+                int rows = sqlInsert.ExecuteNonQuery();
+                if (1 == rows)
+                {
+                    error.Text = "News added";
+                }
+                else
+                {
+                    error.Text = "Failed to add news";
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                error.Text = ex.ToString();
+            }
+        }
     }
 }
